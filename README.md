@@ -20,4 +20,3 @@ AMC 10 to AIME level practice:
 2. Upload all files from this folder
 3. Go to **Settings → Pages → Source → Deploy from a branch → main → / (root) → Save**
 4. Your site will be live at `https://yourusername.github.io/repo-name/`
-
