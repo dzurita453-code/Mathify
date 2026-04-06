@@ -2,171 +2,317 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Math Study Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mathify</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    background: #0c0c10;
-    color: #e0ddd6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .container {
-    max-width: 560px;
-    width: 100%;
-  }
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: fadeUp .5s ease both;
-  }
-  .header .label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #666;
-    margin-bottom: 12px;
-  }
-  .header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 38px;
-    font-weight: 400;
-    color: #f5f3ee;
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .header p {
-    font-size: 15px;
-    color: #777;
-    line-height: 1.6;
-  }
-  .card {
-    display: block;
-    text-decoration: none;
-    background: #141418;
-    border: 1px solid #1e1e26;
-    border-radius: 14px;
-    padding: 28px 28px 24px;
-    margin-bottom: 16px;
-    transition: all .25s cubic-bezier(.4,0,.2,1);
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp .5s ease both;
-  }
-  .card:nth-child(1) { animation-delay: .1s; }
-  .card:nth-child(2) { animation-delay: .2s; }
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,0,0,.4);
-  }
-  .card:hover .card-icon {
-    transform: scale(1.1);
-  }
-  .card:hover .arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  .card-icon {
-    font-size: 36px;
-    margin-bottom: 14px;
-    display: block;
-    transition: transform .25s;
-  }
-  .card-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    font-weight: 400;
-    color: #f5f3ee;
-    margin-bottom: 6px;
-  }
-  .card-desc {
-    font-size: 14px;
-    color: #888;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-  .card-meta {
-    font-size: 12px;
-    color: #555;
-    display: flex;
-    gap: 14px;
-  }
-  .card-meta span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .arrow {
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateX(-6px) translateY(-50%);
-    font-size: 22px;
-    color: var(--accent);
-    opacity: 0;
-    transition: all .25s;
-  }
-  .footer {
-    text-align: center;
-    margin-top: 32px;
-    font-size: 12px;
-    color: #444;
-    animation: fadeUp .5s ease both;
-    animation-delay: .3s;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @media (max-width: 480px) {
-    .header h1 { font-size: 28px; }
-    .card { padding: 22px; }
-    .card-title { font-size: 19px; }
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080d;overflow-x:hidden;font-family:'Source Sans 3','Segoe UI',sans-serif;color:#d8d5cf}
+input:focus{outline:none;border-color:#555!important}
+button{cursor:pointer}
+button:active{opacity:.85}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#08080d}
+::-webkit-scrollbar-thumb{background:#222230;border-radius:3px}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="label">Study Tools</div>
-    <h1>Math Study Hub</h1>
-    <p>Two interactive tools for learning and practicing math — from algebra fundamentals to multivariable calculus.</p>
-  </div>
+<div id="root"></div>
+<script>
+var e=React.createElement,useState=React.useState,useEffect=React.useEffect,useRef=React.useRef;
+var ff="'IBM Plex Mono',monospace";
 
-  <a href="algebra-to-calc3.html" class="card" style="--accent:#c2703e;">
-    <span class="card-icon">📘</span>
-    <div class="card-title">Algebra → Calculus III</div>
-    <div class="card-desc">Complete course covering algebra, trig, and all three semesters of calculus. Concept lessons with worked examples, then practice problems with hints and solutions.</div>
-    <div class="card-meta">
-      <span>📖 6 courses</span>
-      <span>📝 24 lessons</span>
-      <span>✏️ 89 problems</span>
-    </div>
-    <div class="arrow">→</div>
-  </a>
+// ═══════════════════════════════════════
+// STUDY COURSES (Algebra → Calc 3)
+// ═══════════════════════════════════════
+var COURSES=[{id:"alg1",title:"Algebra I",sub:"Foundations",color:"#e07a2f",icon:"x",desc:"Variables, equations, functions",lessons:[{title:"Linear Equations & Inequalities",sections:[{h:"Solving Linear Equations",body:"A linear equation has x to the first power. Goal: isolate x.\n\n  3x + 7 = 22 → 3x = 15 → x = 5\n\nVariables on both sides:\n  5x − 3 = 2x + 9 → 3x = 12 → x = 4\n\nDistribute first:\n  2(3x−1)−4 = 3(x+2) → 6x−6 = 3x+6 → x = 4\n\nAlways verify in the ORIGINAL equation."},{h:"Inequalities",body:"Same as equations EXCEPT:\n⚠️ Multiply/divide by NEGATIVE → FLIP the sign.\n\n  −2x > 6 → x < −3\n\nCompound: −1 < 2x+3 ≤ 9 → −2 < x ≤ 3\nInterval notation: (−2, 3]"},{h:"Absolute Value",body:"|x| = distance from 0.\n\n|expr| = k (k>0): expr = k OR expr = −k\n\n|2x−3| = 7 → x=5 or x=−2\n\n|x| < 3 → −3 < x < 3\n|x| > 3 → x<−3 or x>3"}],problems:[{q:"Solve: 4(x−3)+2 = 3x+5",a:"15",sol:"4x−10=3x+5 → x=15.",h:"Distribute first."},{q:"Solve: −3x+7 > 19",a:"x < -4",sol:"−3x>12 → x<−4.",h:"Flip when ÷ negative."},{q:"Solve: |3x−6| = 12",a:"6 and -2",sol:"3x−6=12→x=6. 3x−6=−12→x=−2.",h:"Two cases."},{q:"Three consecutive integers sum to 72. Largest?",a:"25",sol:"n+n+1+n+2=72→n=23. Largest=25.",h:"Let n, n+1, n+2."}]},{title:"Quadratic Equations",sections:[{h:"Factoring",body:"ax²+bx+c=0. Factor then zero product property.\n  x²−5x+6=0 → (x−2)(x−3)=0 → x=2,3\n  x²−16=0 → (x−4)(x+4)=0 → x=±4"},{h:"Quadratic Formula",body:"x = (−b ± √(b²−4ac))/(2a)\n\nDiscriminant Δ=b²−4ac:\n  Δ>0: two real solutions\n  Δ=0: one repeated\n  Δ<0: no real (complex)\n\n2x²−3x−5=0: x=(3±7)/4 → 5/2 or −1"},{h:"Completing the Square",body:"x²+6x+2=0 → (x+3)²=7 → x=−3±√7\n\nVertex: x=−b/(2a), plug back for y."}],problems:[{q:"x²−9x+20=0",a:"4 and 5",sol:"(x−4)(x−5)=0.",h:"Multiply 20, add 9."},{q:"2x²+x−6=0, positive root?",a:"3/2",sol:"(−1+7)/4=3/2.",h:"Quadratic formula."},{q:"Vertex of y=x²−4x+7?",a:"(2, 3)",sol:"x=2, y=3.",h:"x=−b/(2a)."},{q:"Real solutions of 3x²−2x+5=0?",a:"0",sol:"Δ=4−60<0.",h:"Discriminant."}]},{title:"Polynomials & Factoring",sections:[{h:"Operations",body:"(2x+3)(x−4) = 2x²−5x−12\n\nSpecial: (a+b)²=a²+2ab+b², (a−b)(a+b)=a²−b²"},{h:"Factoring",body:"Order: 1)GCF 2)Diff of squares 3)Trinomial 4)AC method 5)Grouping 6)Cubes\n\na³+b³=(a+b)(a²−ab+b²) SOAP: Same,Opposite,Always Positive"},{h:"Division",body:"Synthetic division for ÷(x−c).\nRemainder Theorem: f(c)=remainder.\nFactor Theorem: f(c)=0 ↔ (x−c) is factor."}],problems:[{q:"Factor: 2x³−18x",a:"2x(x-3)(x+3)",sol:"2x(x²−9)=2x(x−3)(x+3).",h:"GCF then diff squares."},{q:"Factor: 3x²+11x+6",a:"(3x+2)(x+3)",sol:"AC=18, split.",h:"AC method."},{q:"Factor: x³+8",a:"(x+2)(x²-2x+4)",sol:"Sum of cubes.",h:"a³+b³ formula."}]},{title:"Systems of Equations",sections:[{h:"Substitution",body:"Solve one for a variable, plug in.\n  y=2x+1, 3x+y=11 → x=2, y=5"},{h:"Elimination",body:"Add/subtract to eliminate.\n  2x+3y=12, 4x−3y=6 → 6x=18 → x=3,y=2"}],problems:[{q:"x+y=10, x−y=4. x=?",a:"7",sol:"Add: 2x=14.",h:"Add equations."},{q:"y=x², y=x+2. Positive x?",a:"2",sol:"x²=x+2→(x−2)(x+1)=0.",h:"Set equal."}]},{title:"Radicals & Rationals",sections:[{h:"Radicals",body:"√(ab)=√a·√b. √50=5√2.\nRationalize: 1/√3=√3/3."},{h:"Rationals",body:"Factor and cancel. Add: find LCD.\nSolve: ×LCD, CHECK extraneous solutions!"}],problems:[{q:"√(200)=?",a:"10√2",sol:"√(100·2)=10√2.",h:"Largest perfect square."},{q:"(x²−9)/(x²+5x+6)=?",a:"(x-3)/(x+2)",sol:"Factor both.",h:"Factor."}]}]},{id:"alg2",title:"Algebra II",sub:"& Precalculus",color:"#8338ec",icon:"f(x)",desc:"Functions, logs, complex numbers",lessons:[{title:"Functions",sections:[{h:"Fundamentals",body:"One output per input.\nDomain: denom≠0, radicand≥0, log arg>0."},{h:"Composition & Inverses",body:"(f∘g)(x)=f(g(x)). Order matters!\nInverse: swap x,y, solve. Verify: f(f⁻¹(x))=x."},{h:"Transformations",body:"y=f(x)+k: up. y=f(x−h): right.\ny=af(x): stretch. y=−f(x): flip."}],problems:[{q:"f(x)=x²−1. f(f(2))=?",a:"8",sol:"f(2)=3, f(3)=8.",h:"Inside-out."},{q:"f(x)=3x+2. f⁻¹(x)=?",a:"(x-2)/3",sol:"Swap and solve.",h:"y=3x+2→x=(y−2)/3."},{q:"Domain of √(5−2x)?",a:"x ≤ 5/2",sol:"5−2x≥0.",h:"Radicand≥0."}]},{title:"Exponentials & Logarithms",sections:[{h:"Exponentials",body:"a⁰=1, aˣaʸ=aˣ⁺ʸ, (aˣ)ʸ=aˣʸ\ne≈2.718. Growth: A=Peʳᵗ."},{h:"Logarithms",body:"log_a(x)=y means aʸ=x.\nlog(AB)=logA+logB, log(Aⁿ)=nlogA\nChange base: log_a(x)=ln(x)/ln(a)"},{h:"Solving",body:"Exponential→take log. Log→exponential.\n⚠️ Check log arguments > 0!"}],problems:[{q:"2ˣ=64. x=?",a:"6",sol:"2⁶=64.",h:"64 as power of 2."},{q:"log₃(27)+log₃(9)=?",a:"5",sol:"3+2=5.",h:"27=3³,9=3²."},{q:"log₂(x)+log₂(x+6)=4",a:"2",sol:"x²+6x=16→x=2.",h:"Combine, convert."},{q:"e^(2x)=7. x=?",a:"ln(7)/2",sol:"2x=ln7.",h:"Take ln."}]},{title:"Complex Numbers",sections:[{h:"Basics",body:"i=√(−1), i²=−1. (3+2i)(1−4i)=11−10i\ni powers: i,−1,−i,1,… cycle of 4."}],problems:[{q:"(2+3i)(4−i)=?",a:"11+10i",sol:"8−2i+12i−3i²=11+10i.",h:"FOIL, i²=−1."},{q:"i⁴⁷=?",a:"-i",sol:"47mod4=3, i³=−i.",h:"Cycle of 4."}]},{title:"Sequences & Series",sections:[{h:"Arithmetic",body:"aₙ=a₁+(n−1)d. Sₙ=n(a₁+aₙ)/2."},{h:"Geometric",body:"aₙ=a₁rⁿ⁻¹. S∞=a₁/(1−r) if |r|<1."}],problems:[{q:"a₁=5,d=3. a₅₀=?",a:"152",sol:"5+49(3)=152.",h:"Formula."},{q:"8+4+2+1+…=?",a:"16",sol:"8/(1−1/2)=16.",h:"Infinite geo."},{q:"Sum 1 to 100?",a:"5050",sol:"100(101)/2.",h:"n(n+1)/2."}]}]},{id:"trig",title:"Trigonometry",sub:"Angles & Waves",color:"#2a9d8f",icon:"θ",desc:"Angles, ratios, circular motion",lessons:[{title:"Trig Functions & Unit Circle",sections:[{h:"SOH-CAH-TOA",body:"sin=O/H, cos=A/H, tan=O/A\n45-45-90: 1,1,√2. 30-60-90: 1,√3,2."},{h:"Unit Circle",body:"(cosθ,sinθ) on unit circle.\n0°:0,1  30°:½,√3/2  45°:√2/2,√2/2  60°:√3/2,½  90°:1,0\nQ1:all+ Q2:sin+ Q3:tan+ Q4:cos+"},{h:"Identities",body:"sin²+cos²=1. sin2θ=2sinθcosθ.\ncos2θ=cos²−sin². Sum formulas exist."}],problems:[{q:"sin(5π/6)=?",a:"1/2",sol:"Q2, ref π/6.",h:"Reference angle."},{q:"sinθ=3/5 Q1. cosθ=?",a:"4/5",sol:"cos²=16/25.",h:"sin²+cos²=1."},{q:"cos(75°) exact?",a:"(√6-√2)/4",sol:"cos(45+30).",h:"Sum formula."}]},{title:"Graphing & Inverses",sections:[{h:"Graphing",body:"y=Asin(Bx−C)+D. Amp=|A|, Period=2π/|B|."},{h:"Inverse Trig",body:"arcsin:[−1,1]→[−π/2,π/2]\narctan:ℝ→(−π/2,π/2)"}],problems:[{q:"Period of sin(3x)?",a:"2π/3",sol:"2π/3.",h:"2π/B."},{q:"arctan(√3)=?",a:"π/3",sol:"tan(π/3)=√3.",h:"Which angle?"}]},{title:"Trig Equations",sections:[{h:"Solving",body:"sinx=½ in [0,2π): x=π/6, 5π/6.\nUse identities to simplify first.\n⚠️ Never divide by trig function!"}],problems:[{q:"cosx=−½ in [0,2π)?",a:"2π/3 and 4π/3",sol:"Ref π/3, Q2+Q3.",h:"cos neg Q2,Q3."},{q:"2sin²x=1 in [0,2π)?",a:"π/4, 3π/4, 5π/4, 7π/4",sol:"sinx=±√2/2.",h:"Isolate sin²."}]},{title:"Law of Sines & Cosines",sections:[{h:"Law of Sines",body:"a/sinA=b/sinB=c/sinC=2R."},{h:"Law of Cosines",body:"c²=a²+b²−2abcosC."}],problems:[{q:"A=30°,a=5,b=8. sinB=?",a:"4/5",sol:"8sin30°/5=4/5.",h:"Law of Sines."},{q:"Sides 3,4,5. Angle opp 5?",a:"90°",sol:"cosC=0.",h:"Law of Cosines."}]}]},{id:"calc1",title:"Calculus I",sub:"Limits & Derivatives",color:"#c25454",icon:"f'",desc:"Mathematics of change and motion",lessons:[{title:"Limits",sections:[{h:"Evaluating Limits",body:"lim[x→a]f(x)=L. Strategy:\n1)Plug in 2)If 0/0: factor 3)Rationalize 4)L'Hôpital\n\nlim[x→3](x²−9)/(x−3)=x+3→6"},{h:"Special Limits",body:"sin(x)/x→1, (eˣ−1)/x→1, (1+1/n)ⁿ→e\nAt ∞: divide by highest power.\nContinuity: f(a) exists, lim exists, equal."}],problems:[{q:"lim[x→2](x²−4)/(x−2)=?",a:"4",sol:"(x+2)→4.",h:"Factor."},{q:"lim[x→∞](5x³−2x)/(3x³+1)=?",a:"5/3",sol:"÷x³.",h:"Highest power."},{q:"lim[x→0]sin(5x)/x=?",a:"5",sol:"5·sin(5x)/(5x)→5.",h:"Rewrite."},{q:"lim[x→0](eˣ−1)/(2x)=?",a:"1/2",sol:"½·1=½.",h:"Special limit."}]},{title:"Derivative Rules",sections:[{h:"Power Rule & Basics",body:"d/dx[xⁿ]=nxⁿ⁻¹\neˣ→eˣ, lnx→1/x, sinx→cosx, cosx→−sinx"},{h:"Product/Quotient/Chain",body:"(fg)'=f'g+fg'. (f/g)'=(f'g−fg')/g².\nChain: [f(g(x))]'=f'(g(x))·g'(x)\n  sin(3x)→3cos(3x), e^(x²)→2xe^(x²)"},{h:"Implicit",body:"Diff both sides w.r.t. x.\nx²+y²=25→2x+2yy'=0→y'=−x/y"}],problems:[{q:"d/dx[3x⁴−2x²+7]=?",a:"12x³ - 4x",sol:"Power rule.",h:"nxⁿ⁻¹."},{q:"d/dx[x²eˣ]=?",a:"eˣ(x² + 2x)",sol:"Product.",h:"f'g+fg'."},{q:"d/dx[sin(x³)]=?",a:"3x²cos(x³)",sol:"Chain.",h:"Outside'×inside'."},{q:"d/dx[ln(x²+1)]=?",a:"2x/(x²+1)",sol:"Chain+ln.",h:"1/u·u'."},{q:"x²+y²=25 at (3,4). dy/dx=?",a:"-3/4",sol:"y'=−x/y.",h:"Implicit."}]},{title:"Applications",sections:[{h:"Tangent Lines",body:"y−f(a)=f'(a)(x−a).\nApprox: f(a+Δx)≈f(a)+f'(a)Δx."},{h:"Optimization",body:"f'=0→critical pts. f''>0→min, <0→max.\nMax rect area, P=20: A=l(10−l)→l=5, A=25."},{h:"Related Rates",body:"Relate quantities, diff w.r.t. t, solve.\nLadder: x²+y²=25, dy/dt=−3/2."},{h:"L'Hôpital",body:"0/0 or ∞/∞: lim f/g=lim f'/g'.\nCurve sketch: domain→f'→f''→asymptotes."}],problems:[{q:"Tangent to x² at x=3. y-intercept?",a:"-9",sol:"y=6x−9.",h:"Slope=6."},{q:"f=x³−3x. Local max value?",a:"2",sol:"f'=0→x=±1. f(−1)=2.",h:"2nd deriv test."},{q:"lim[x→0](eˣ−1−x)/x²?",a:"1/2",sol:"L'Hôpital twice.",h:"Apply twice."},{q:"dA/dt=3, r=2. dr/dt=?",a:"3/(4π)",sol:"dA/dt=2πr·dr/dt.",h:"A=πr²."}]}]},{id:"calc2",title:"Calculus II",sub:"Integration & Series",color:"#5a5aa0",icon:"∫",desc:"Accumulation, volumes, infinite sums",lessons:[{title:"Integrals",sections:[{h:"Antiderivatives",body:"∫xⁿ=xⁿ⁺¹/(n+1)+C. ∫eˣ=eˣ+C.\n∫sinx=−cosx+C. ∫1/x=ln|x|+C."},{h:"FTC",body:"∫ₐᵇf(x)dx=F(b)−F(a).\n∫₁³x²dx=[x³/3]₁³=26/3."},{h:"Area",body:"Between curves: ∫[top−bottom]dx.\ny=x,y=x² on [0,1]: ∫(x−x²)=1/6."}],problems:[{q:"∫(3x²+2x)dx=?",a:"x³ + x² + C",sol:"Reverse power rule.",h:"Each term."},{q:"∫₀²4xdx=?",a:"8",sol:"[2x²]₀²=8.",h:"Antideriv: 2x²."},{q:"Area y=x,y=x² on [0,1]?",a:"1/6",sol:"∫(x−x²)=1/6.",h:"Top−bottom."}]},{title:"Techniques",sections:[{h:"u-Substitution",body:"∫2xcos(x²)dx: u=x²→sin(x²)+C."},{h:"By Parts",body:"∫udv=uv−∫vdu. LIATE.\n∫xeˣ=xeˣ−eˣ+C."},{h:"Partial Fractions",body:"Decompose rational functions.\n1/(x²−1)=1/(2(x−1))−1/(2(x+1))."}],problems:[{q:"∫2xsin(x²)dx=?",a:"-cos(x²) + C",sol:"u=x².",h:"u-sub."},{q:"∫xcosxdx=?",a:"x·sin x + cos x + C",sol:"Parts.",h:"u=x."},{q:"∫₀¹xeˣdx=?",a:"1",sol:"[xeˣ−eˣ]₀¹=1.",h:"Parts."}]},{title:"Volumes & Improper",sections:[{h:"Volumes",body:"Disk: π∫[f(x)]²dx. Shell: 2π∫xf(x)dx."},{h:"Improper",body:"∫₁∞1/x²dx=1 (converges). ∫₁∞1/xdx=∞ (diverges)."}],problems:[{q:"Volume y=x² [0,2] around x-axis?",a:"32π/5",sol:"π∫x⁴dx.",h:"Disk."},{q:"∫₁∞1/x³dx=?",a:"1/2",sol:"[−1/(2x²)]₁∞=½.",h:"p=3>1."}]},{title:"Series",sections:[{h:"Tests",body:"Divergence: limaₙ≠0→diverges.\np-series: Σ1/nᵖ, p>1→converges.\nGeo: |r|<1→a/(1−r). Ratio test."},{h:"Taylor",body:"eˣ=1+x+x²/2!+…\nsinx=x−x³/3!+…\ncosx=1−x²/2!+…\n1/(1−x)=1+x+x²+…"}],problems:[{q:"Σ1/n³ converge?",a:"converge",sol:"p=3>1.",h:"p-test."},{q:"Σ(1/3)ⁿ=?",a:"3/2",sol:"1/(1−1/3).",h:"Geometric."},{q:"Radius of Σxⁿ/n!?",a:"∞",sol:"Ratio→0.",h:"Ratio test."}]}]},{id:"calc3",title:"Calculus III",sub:"Multivariable",color:"#0096c7",icon:"∇",desc:"3D calculus, vector fields, big theorems",lessons:[{title:"Vectors & 3D",sections:[{h:"Vectors",body:"Dot: v·w=Σaᵢbᵢ=|v||w|cosθ. Scalar. ⊥ if 0.\nCross: v×w=vector ⊥ both. |v×w|=|v||w|sinθ."},{h:"Lines & Planes",body:"Line: r(t)=P₀+tv.\nPlane: a(x−x₀)+b(y−y₀)+c(z−z₀)=0."}],problems:[{q:"⟨1,2,3⟩·⟨4,−1,2⟩=?",a:"8",sol:"4−2+6=8.",h:"Multiply+add."},{q:"|⟨3,4⟩|=?",a:"5",sol:"√25.",h:"√(a²+b²)."},{q:"Plane thru (1,2,3) normal ⟨1,1,1⟩?",a:"x+y+z=6",sol:"1+2+3=6.",h:"Formula."},{q:"⟨1,0,0⟩×⟨0,1,0⟩=?",a:"⟨0,0,1⟩",sol:"i×j=k.",h:"Cross product."}]},{title:"Partial Derivatives",sections:[{h:"Partials",body:"∂f/∂x: treat y as constant.\nfₓᵧ=fᵧₓ (Clairaut's)."},{h:"Gradient",body:"∇f=⟨fₓ,fᵧ⟩. Points toward steepest increase.\n|∇f|=max rate. ⊥ level curves.\nD_uf=∇f·u."},{h:"Optimization",body:"∇f=0 for critical pts.\nD=fₓₓfᵧᵧ−fₓᵧ². D>0,fₓₓ>0→min. D<0→saddle.\nLagrange: ∇f=λ∇g, g=c."}],problems:[{q:"f=x³+2xy−y². fₓ=?",a:"3x²+2y",sol:"y constant.",h:"∂/∂x."},{q:"∇f at (1,2) for x²y³?",a:"⟨16, 12⟩",sol:"fₓ=2xy³=16, fᵧ=3x²y²=12.",h:"Both partials."},{q:"Classify x²−y² at origin?",a:"saddle point",sol:"D=−4<0.",h:"D<0."}]},{title:"Multiple Integrals",sections:[{h:"Double",body:"∫∫f dA. Inside first. Fubini: order flexible."},{h:"Coordinates",body:"Polar: dA=r dr dθ. Cylindrical: dV=r dz dr dθ.\nSpherical: dV=ρ²sinφ dρ dφ dθ."}],problems:[{q:"∫₀¹∫₀¹(x+y)dydx=?",a:"1",sol:"Inner:x+½. Outer:1.",h:"y first."},{q:"∬1dA over x²+y²≤4?",a:"4π",sol:"Polar: 4π.",h:"Circle→polar."}]},{title:"Vector Calculus",sections:[{h:"Line Integrals",body:"∫F·dr = work. Conservative: F=∇f→path independent.\nTest: ∂P/∂y=∂Q/∂x."},{h:"Green's Theorem",body:"∮(Pdx+Qdy)=∬(Qₓ−Pᵧ)dA."},{h:"Div & Curl",body:"divF=∇·F. curlF=∇×F. curl=0↔conservative.\nStokes: ∮F·dr=∬(curlF)·dS\nDivergence: ∯F·dS=∭(divF)dV"}],problems:[{q:"F=⟨2xy,x²⟩ conservative?",a:"yes",sol:"Pᵧ=2x=Qₓ.",h:"Check partials."},{q:"divF for ⟨x²,xy,z³⟩?",a:"2x+x+3z²",sol:"Sum ∂s.",h:"∂P/∂x+…"},{q:"∇f=⟨2x,2y⟩. f=?",a:"x²+y²+C",sol:"Integrate+match.",h:"∫Pdx."},{q:"Green's ∮(ydx−xdy) on x²+y²=4?",a:"-8π",sol:"∬(−2)dA=−8π.",h:"∬(Qₓ−Pᵧ)dA."}]}]}];
 
-  <a href="math-trainer.html" class="card" style="--accent:#2a9d8f;">
-    <span class="card-icon">⚡</span>
-    <div class="card-title">Math Competition Trainer</div>
-    <div class="card-desc">AMC 10 to AIME level practice. Lessons on key techniques, 50+ competition problems, and DMI-style timed rounds (3 min lightning, 10 min standard, 1 hour marathon).</div>
-    <div class="card-meta">
-      <span>🧠 13 strategy lessons</span>
-      <span>✏️ 55 problems</span>
-      <span>⏱ 3 round types</span>
-    </div>
-    <div class="arrow">→</div>
-  </a>
+// ═══════════════════════════════════════
+// COMPETITION DATA
+// ═══════════════════════════════════════
+var COMP_TOPICS={
+  algebra:{label:"Algebra",icon:"ƒ",color:"#e07a2f"},
+  combinatorics:{label:"Combinatorics",icon:"C",color:"#2a9d8f"},
+  numberTheory:{label:"Number Theory",icon:"#",color:"#8338ec"},
+  geometry:{label:"Geometry",icon:"△",color:"#0096c7"}
+};
+var COMP_STRATS={
+  algebra:[{t:"Vieta's Formulas",d:"Relate roots to coefficients without solving."},{t:"Simon's Factoring Trick",d:"Add constant to both sides to factor: (x+b)(y+a)=c+ab."},{t:"AM-GM & Cauchy-Schwarz",d:"Key inequalities for optimization."}],
+  combinatorics:[{t:"Complementary Counting",d:"Total − Bad. Signal: 'at least', 'at most'."},{t:"Stars & Bars",d:"Identical items into distinct bins: C(n+k−1,k−1)."},{t:"Catalan Numbers",d:"Cₙ=C(2n,n)/(n+1). Dyck paths, parenthesizations."}],
+  numberTheory:[{t:"Modular Arithmetic Cycles",d:"Powers mod n repeat. Find cycle, reduce exponent."},{t:"CRT",d:"Solve mod coprime factors separately."},{t:"Legendre's Formula",d:"vₚ(n!)=Σ⌊n/pᵏ⌋. Trailing zeros."}],
+  geometry:[{t:"Heron's Formula",d:"A=√(s(s−a)(s−b)(s−c))."},{t:"Power of a Point",d:"PA·PB=PC·PD for chords/secants."},{t:"Extended Law of Sines",d:"a/sinA=2R."}]
+};
+var COMP_PROBS={
+  algebra:[
+    {q:"Roots of x²−7x+12=0 are r,s. r²+s²=?",a:"25",sol:"r+s=7,rs=12. (r+s)²−2rs=25.",h:"Vieta's.",d:2},
+    {q:"Sum of all x with |2x−5|=|x+1|?",a:"22/3",sol:"x=6 or 4/3. Sum=22/3.",h:"Two cases.",d:2},
+    {q:"Positive reals a+b=1. Min of 1/a+1/b?",a:"4",sol:"Cauchy-Schwarz: (a+b)(1/a+1/b)≥4.",h:"AM-HM.",d:3},
+    {q:"Ordered pairs (a,b)∈Z⁺: 1/a+1/b=1/6?",a:"9",sol:"(a−6)(b−6)=36. 9 divisor pairs.",h:"SFFT.",d:3},
+    {q:"√(2+√(2+√(2+…)))=?",a:"2",sol:"x²=2+x→x=2.",h:"Self-similar.",d:4},
+    {q:"f(x)=2x+3, g(x)=x²−1. f(g(3))=?",a:"19",sol:"g(3)=8, f(8)=19.",h:"Inside-out.",d:1},
+  ],
+  combinatorics:[
+    {q:"Arrangements of BANANA?",a:"60",sol:"6!/(3!2!)=60.",h:"Multinomial.",d:1},
+    {q:"Subsets of {1,…,10} with no two consecutive?",a:"144",sol:"Fibonacci: f(10)=144.",h:"Recurrence.",d:2},
+    {q:"Committee of 5 from 6M+4W, ≥2W?",a:"186",sol:"252−6−60=186.",h:"Complementary.",d:2},
+    {q:"Lattice paths (0,0)→(4,4) below y=x?",a:"14",sol:"C₄=C(8,4)/5=14.",h:"Catalan.",d:3},
+    {q:"8 non-attacking rooks on 8×8?",a:"40320",sol:"8!=40320.",h:"Permutation.",d:2},
+    {q:"Derangements of {1,2,3,4,5}?",a:"44",sol:"D(5)=44.",h:"Derangement formula.",d:3},
+    {q:"Choose 3 from 8?",a:"56",sol:"C(8,3)=56.",h:"C(n,k).",d:1},
+    {q:"1–100 divisible by 2 or 3?",a:"67",sol:"50+33−16=67.",h:"Inclusion-exclusion.",d:2},
+  ],
+  numberTheory:[
+    {q:"2⁴⁰ mod 7?",a:"2",sol:"2³≡1. 40=3·13+1. 2⁴⁰≡2.",h:"Find cycle.",d:1},
+    {q:"φ(100)=?",a:"40",sol:"100(1−½)(1−⅕)=40.",h:"Euler's totient.",d:2},
+    {q:"Last two digits of 7²⁰²³?",a:"43",sol:"7⁴≡1(mod100). 7²³=7³=343≡43.",h:"Euler+compute.",d:3},
+    {q:"Trailing zeros in 100!?",a:"24",sol:"⌊100/5⌋+⌊100/25⌋=24.",h:"Legendre.",d:2},
+    {q:"gcd(48,18)=?",a:"6",sol:"48=2·18+12, 18=1·12+6, 12=2·6+0.",h:"Euclidean.",d:1},
+    {q:"Factors of 360?",a:"24",sol:"2³3²5¹: 4·3·2=24.",h:"(exp+1) product.",d:2},
+    {q:"3¹⁰⁰ mod 5?",a:"1",sol:"3⁴≡1. 100/4=25.",h:"Cycle.",d:2},
+    {q:"Smallest n: n≡2(3), n≡3(5), n≡2(7)?",a:"23",sol:"Test: 23 works.",h:"CRT.",d:4},
+  ],
+  geometry:[
+    {q:"Right triangle legs 5,12. Hypotenuse?",a:"13",sol:"√(25+144)=13.",h:"Pythagorean.",d:1},
+    {q:"Triangle 13,14,15. Area?",a:"84",sol:"s=21. √(21·8·7·6)=84.",h:"Heron's.",d:2},
+    {q:"Circle R=10, chord 12. Distance center→chord?",a:"8",sol:"√(100−36)=8.",h:"Perpendicular bisects.",d:2},
+    {q:"Regular hexagon side 6. Area?",a:"54√3",sol:"6·(√3/4)·36=54√3.",h:"6 equilateral triangles.",d:2},
+    {q:"Inscribed triangle R=7, ∠A=60°. BC=?",a:"7√3",sol:"BC=2·7·sin60°=7√3.",h:"Extended law of sines.",d:3},
+    {q:"Tangent length 12, dist to center 13. Radius?",a:"5",sol:"r²+144=169→r=5.",h:"Right triangle.",d:2},
+    {q:"Two chords split 3,8 and 4,x. x=?",a:"6",sol:"3·8=4·x→x=6.",h:"Power of point.",d:3},
+    {q:"Square diagonal 10. Area?",a:"50",sol:"d²/2=50.",h:"Area=d²/2.",d:1},
+  ]
+};
+var COMP_ROUNDS={
+  lightning:{name:"Lightning",time:180,count:6,minD:1,maxD:2,icon:"⚡",color:"#ecc94b"},
+  standard:{name:"Standard",time:600,count:8,minD:1,maxD:3,icon:"📝",color:"#e07a2f"},
+  marathon:{name:"Marathon",time:3600,count:15,minD:2,maxD:4,icon:"🏔",color:"#e04545"}
+};
 
-  <div class="footer">
-    Works offline · No account needed · Open in any browser
-  </div>
-</div>
-</body>
-</html>
+function pickCompProbs(n,minD,maxD){
+  var pool=[];Object.keys(COMP_PROBS).forEach(function(t){COMP_PROBS[t].forEach(function(p){if(p.d>=minD&&p.d<=maxD)pool.push(Object.assign({},p,{topic:t}));});});
+  for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=pool[i];pool[i]=pool[j];pool[j]=tmp;}
+  return pool.slice(0,Math.min(n,pool.length));
+}
+
+// ═══════════════════════════════════════
+// UNIFIED APP
+// ═══════════════════════════════════════
+function App(){
+  var _v=useState("home"),view=_v[0],setView=_v[1];
+  // Study state
+  var _c=useState(null),cid=_c[0],setCid=_c[1];
+  var _l=useState(0),li=_l[0],setLi=_l[1];
+  var _s=useState(0),si=_s[0],setSi=_s[1];
+  var _p=useState(0),pi=_p[0],setPi=_p[1];
+  var _f=useState(null),fb=_f[0],setFb=_f[1];
+  var _h=useState(false),showH=_h[0],setShowH=_h[1];
+  var _ss=useState(false),showS=_ss[0],setShowS=_ss[1];
+  var _sc=useState({c:0,t:0}),score=_sc[0],setScore=_sc[1];
+  // Comp state
+  var _ct=useState(null),compTopic=_ct[0],setCompTopic=_ct[1];
+  var _rt=useState(null),roundType=_rt[0],setRoundType=_rt[1];
+  var _tp=useState([]),tProbs=_tp[0],setTProbs=_tp[1];
+  var _ta=useState({}),tAns=_ta[0],setTAns=_ta[1];
+  var _tl=useState(0),timeLeft=_tl[0],setTimeLeft=_tl[1];
+  var _to=useState(false),timerOn=_to[0],setTimerOn=_to[1];
+  var _td=useState(false),tDone=_td[0],setTDone=_td[1];
+  var _ri=useState(null),revId=_ri[0],setRevId=_ri[1];
+  var inputRef=useRef(null);
+  var intRef=useRef(null);
+
+  useEffect(function(){
+    if(timerOn&&timeLeft>0){
+      intRef.current=setInterval(function(){setTimeLeft(function(t){if(t<=1){clearInterval(intRef.current);setTimerOn(false);setTDone(true);return 0;}return t-1;});},1000);
+    }
+    return function(){clearInterval(intRef.current);};
+  },[timerOn]);
+
+  useEffect(function(){
+    if(inputRef.current&&(view==="practice"||view==="timed")){
+      var t=setTimeout(function(){if(inputRef.current)inputRef.current.focus();},50);
+      return function(){clearTimeout(t);};
+    }
+  },[pi,view]);
+
+  var course=null;for(var i=0;i<COURSES.length;i++){if(COURSES[i].id===cid)course=COURSES[i];}
+  var lesson=course?course.lessons[li]:null;
+  var fmt=function(s){return Math.floor(s/60)+":"+(s%60<10?"0":"")+(s%60);};
+
+  // Styles
+  var pg={fontFamily:"'Source Sans 3',sans-serif",background:"#08080d",color:"#d8d5cf",minHeight:"100vh",padding:"20px 24px",maxWidth:740,margin:"0 auto",boxSizing:"border-box"};
+  var tag=function(c){return{display:"inline-block",fontSize:10,fontFamily:ff,fontWeight:600,letterSpacing:1.5,textTransform:"uppercase",padding:"3px 10px",borderRadius:4,background:c+"18",color:c}};
+  var crd={background:"#0e0e15",border:"1px solid #1a1a24",borderRadius:10,padding:"18px 20px",cursor:"pointer",marginBottom:8};
+  var bt=function(c){return{background:c||"#2a9d8f",color:"#fff",border:"none",borderRadius:7,padding:"9px 18px",fontFamily:ff,fontSize:12,fontWeight:600,cursor:"pointer"}};
+  var bg={background:"transparent",border:"1px solid #222230",color:"#777068",borderRadius:7,padding:"8px 15px",fontFamily:ff,fontSize:12,cursor:"pointer"};
+  var inp={flex:1,background:"#0b0b12",border:"1px solid #222230",borderRadius:7,padding:"10px 14px",color:"#d8d5cf",fontSize:15,fontFamily:ff,outline:"none"};
+  var bx={background:"#0e0e15",border:"1px solid #1a1a24",borderRadius:10,padding:"22px",marginBottom:14,fontSize:15,lineHeight:1.8,whiteSpace:"pre-wrap"};
+  var solS={background:"#0a1510",border:"1px solid #15302a",borderRadius:8,padding:"16px 20px",marginTop:10,whiteSpace:"pre-wrap",lineHeight:1.65,fontSize:13,fontFamily:ff,color:"#7ddb8a"};
+  var hntS={background:"#120e18",border:"1px solid #251840",borderRadius:8,padding:"14px 18px",marginTop:10,fontSize:13,color:"#c4a8e8",fontStyle:"italic"};
+  var fbS=function(ok){return{padding:"9px 16px",borderRadius:7,fontFamily:ff,fontSize:13,fontWeight:600,background:ok?"#0a1510":"#180a0a",border:"1px solid "+(ok?"#15302a":"#301515"),color:ok?"#2a9d8f":"#e04040",marginBottom:10}};
+  var bar=function(pct,c){return[e("div",{key:"bg",style:{height:3,background:"#1a1a24",borderRadius:2,marginBottom:14,position:"relative",overflow:"hidden"}},e("div",{style:{position:"absolute",left:0,top:0,height:"100%",width:pct+"%",background:c,borderRadius:2}}))];};
+
+  function resetInput(){if(inputRef.current)inputRef.current.value="";setFb(null);setShowH(false);setShowS(false);}
+  function getAns(){return inputRef.current?inputRef.current.value:"";}
+  function cl(s){return s.replace(/[\s*]/g,"").toLowerCase();}
+
+  function chkStudy(){var ans=getAns();if(!ans.trim()||!lesson)return;var p=lesson.problems[pi];var ok=cl(ans)===cl(p.a);setFb(ok?"y":"n");setScore({c:score.c+(ok?1:0),t:score.t+1});}
+  function nxtStudy(){if(pi<lesson.problems.length-1)setPi(pi+1);else{setPi(0);setView("lesson");setSi(lesson.sections.length-1);}resetInput();}
+  function chkComp(){var ans=getAns();if(!ans.trim())return;var p=tProbs[pi];var ok=cl(ans)===cl(p.a);setFb(ok?"y":"n");setTAns(function(prev){var o=Object.assign({},prev);o[pi]={given:ans,correct:ok};return o;});}
+  function nxtComp(){if(pi<tProbs.length-1)setPi(pi+1);else{setTDone(true);setTimerOn(false);clearInterval(intRef.current);}resetInput();}
+  function skipComp(){setTAns(function(prev){var o=Object.assign({},prev);o[pi]={given:"",correct:false};return o;});nxtComp();}
+  function startRound(type){var c=COMP_ROUNDS[type];setRoundType(type);setTProbs(pickCompProbs(c.count,c.minD,c.maxD));setTAns({});setPi(0);setTimeLeft(c.time);setTimerOn(true);setTDone(false);setRevId(null);resetInput();setScore({c:0,t:0});setView("timed");}
+
+  // ═══ HOME ═══
+  if(view==="home") return e("div",{style:pg},
+    e("div",{style:{textAlign:"center",marginBottom:32,paddingTop:8}},
+      e("div",{style:{fontSize:10,fontFamily:ff,letterSpacing:3,textTransform:"uppercase",color:"#555048",marginBottom:8}},"MATH STUDY HUB"),
+      e("h1",{style:{fontFamily:ff,fontSize:28,fontWeight:700,color:"#f5f5f0",margin:"0 0 6px"}},"Mathify"),
+      e("p",{style:{fontSize:13,color:"#555048"}},"Learn · Practice · Compete")),
+    e("div",{style:Object.assign({},crd,{padding:"24px",borderLeft:"3px solid #e07a2f"}),onClick:function(){setView("studyHome")}},
+      e("div",{style:{fontSize:22,marginBottom:6}},"📘"),
+      e("div",{style:{fontSize:17,fontWeight:600,marginBottom:2}},"Study: Algebra → Calculus III"),
+      e("div",{style:{fontSize:12,color:"#555048"}},"6 courses · 24 lessons · concept teaching + practice")),
+    e("div",{style:Object.assign({},crd,{padding:"24px",borderLeft:"3px solid #2a9d8f"}),onClick:function(){setView("compHome")}},
+      e("div",{style:{fontSize:22,marginBottom:6}},"⚡"),
+      e("div",{style:{fontSize:17,fontWeight:600,marginBottom:2}},"Compete: Math Competition Trainer"),
+      e("div",{style:{fontSize:12,color:"#555048"}},"AMC/AIME level · strategies · timed DMI-style rounds"))
+  );
+
+  // ═══ STUDY HOME ═══
+  if(view==="studyHome") return e("div",{style:pg},
+    e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:20}},
+      e("button",{style:bg,onClick:function(){setView("home")}},"← Home"),
+      e("span",{style:tag("#e07a2f")},"Study")),
+    COURSES.map(function(c,i){return e("div",{key:c.id,style:crd,onClick:function(){setCid(c.id);setView("hub")}},
+      e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:6}},e("span",{style:{fontFamily:ff,fontSize:22,fontWeight:700,color:c.color}},c.icon),e("span",{style:tag(c.color)},c.sub)),
+      e("div",{style:{fontSize:16,fontWeight:600,marginBottom:2}},c.title),
+      e("div",{style:{fontSize:12,color:"#555048"}},c.desc));}));
+
+  // ═══ COMP HOME ═══
+  if(view==="compHome") return e("div",{style:pg},
+    e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:20}},
+      e("button",{style:bg,onClick:function(){setView("home")}},"← Home"),
+      e("span",{style:tag("#2a9d8f")},"Compete")),
+    e("div",{style:{fontFamily:ff,fontSize:11,fontWeight:600,color:"#555048",letterSpacing:2,textTransform:"uppercase",marginBottom:10}},"TOPICS"),
+    Object.keys(COMP_TOPICS).map(function(t){var m=COMP_TOPICS[t];return e("div",{key:t,style:crd,onClick:function(){setCompTopic(t);setView("compTopic")}},
+      e("div",{style:{display:"flex",gap:8,alignItems:"center"}},e("span",{style:{fontFamily:ff,fontSize:22,fontWeight:700,color:m.color}},m.icon),e("span",{style:{fontSize:15,fontWeight:600}},m.label)),
+      e("div",{style:{fontSize:11,color:"#555048",marginTop:2}},COMP_STRATS[t].length+" strategies · "+COMP_PROBS[t].length+" problems"));}),
+    e("div",{style:{fontFamily:ff,fontSize:11,fontWeight:600,color:"#555048",letterSpacing:2,textTransform:"uppercase",margin:"18px 0 10px"}},"TIMED ROUNDS"),
+    Object.keys(COMP_ROUNDS).map(function(k){var r=COMP_ROUNDS[k];return e("div",{key:k,style:crd,onClick:function(){startRound(k)}},
+      e("span",{style:{fontSize:20,marginRight:8}},r.icon),e("span",{style:{fontSize:14,fontWeight:600}},r.name),
+      e("div",{style:{fontSize:11,color:"#555048",marginTop:2}},r.count+" problems · "+Math.floor(r.time/60)+" min"));}));
+
+  // ═══ COMP TOPIC ═══
+  if(view==="compTopic"&&compTopic){var tm=COMP_TOPICS[compTopic]; return e("div",{style:pg},
+    e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:20}},
+      e("button",{style:bg,onClick:function(){setView("compHome")}},"← Back"),e("span",{style:tag(tm.color)},tm.label)),
+    e("div",{style:{fontFamily:ff,fontSize:11,fontWeight:600,color:"#555048",letterSpacing:2,textTransform:"uppercase",marginBottom:10}},"KEY STRATEGIES"),
+    COMP_STRATS[compTopic].map(function(s,i){return e("div",{key:i,style:Object.assign({},bx,{borderLeft:"3px solid "+tm.color,cursor:"default"})},
+      e("div",{style:{fontFamily:ff,fontSize:13,fontWeight:600,color:tm.color,marginBottom:4}},s.t),
+      e("div",{style:{fontSize:13,color:"#888",lineHeight:1.6}},s.d));}),
+    e("button",{style:bt(tm.color),onClick:function(){setTProbs(COMP_PROBS[compTopic].map(function(p){return Object.assign({},p,{topic:compTopic})}));setTAns({});setPi(0);setTDone(false);setTimerOn(false);resetInput();setScore({c:0,t:0});setView("compPractice")}},
+      "Practice "+COMP_PROBS[compTopic].length+" Problems →"));}
+
+  // ═══ HUB ═══
+  if(view==="hub"&&course) return e("div",{style:pg},
+    e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:20}},
+      e("button",{style:bg,onClick:function(){setView("studyHome")}},"← Courses"),e("span",{style:tag(course.color)},course.title)),
+    course.lessons.map(function(l,i){return e("div",{key:i,style:crd,onClick:function(){setLi(i);setSi(0);setView("lesson")}},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+        e("div",null,e("span",{style:{fontFamily:ff,fontSize:12,color:course.color,fontWeight:600,marginRight:8}},(i+1)+"."),e("span",{style:{fontSize:15,fontWeight:600}},l.title),
+          e("div",{style:{fontSize:11,color:"#555048",marginTop:2}},l.sections.length+" sections · "+l.problems.length+" Qs")),
+        e("span",{style:{color:course.color,fontFamily:ff}},"→")));}));
+
+  // ═══ LESSON ═══
+  if(view==="lesson"&&course&&lesson){var sec=lesson.sections[si];var last=si===lesson.sections.length-1;
+    return e("div",{style:pg},
+      e("div",{style:{display:"flex",gap:8,alignItems:"center",marginBottom:14}},
+        e("button",{style:bg,onClick:function(){setView("hub")}},"← "+course.title),e("span",{style:tag(course.color)},"L"+(li+1))),
+      e("h2",{style:{fontFamily:ff,fontSize:18,fontWeight:600,color:"#f5f5f0",margin:"0 0 4px"}},lesson.title),
+      e("div",{style:{fontSize:13,color:"#555048",marginBottom:14}},"Section "+(si+1)+"/"+lesson.sections.length),
+      e("div",{style:{display:"flex",gap:6,flexWrap:"wrap",marginBottom:16}},
+        lesson.sections.map(function(s,i){var a=i===si;return e("button",{key:i,onClick:function(){setSi(i)},style:{background:a?course.color+"22":"transparent",border:"1px solid "+(a?course.color:"#222230"),color:a?course.color:"#666058",borderRadius:6,padding:"5px 12px",fontFamily:ff,fontSize:11,cursor:"pointer",fontWeight:a?600:400}},s.h)})),
+      e("div",{style:Object.assign({},bx,{borderLeft:"3px solid "+course.color})},
+        e("div",{style:{fontFamily:ff,fontSize:14,fontWeight:600,color:course.color,marginBottom:10}},sec.h),
+        e("div",{style:{fontSize:14,lineHeight:1.85,color:"#c0bbae"}},sec.body)),
+      e("div",{style:{display:"flex",gap:8,marginTop:14,flexWrap:"wrap"}},
+        si>0?e("button",{style:bg,onClick:function(){setSi(si-1)}},"← Prev"):null,
+        !last?e("button",{style:bt(course.color),onClick:function(){setSi(si+1)}},"Next →"):null,
+        last&&lesson.problems.length>0?e("button",{style:bt(course.color),onClick:function(){setPi(0);resetInput();setScore({c:0,t:0});setView("practice")}},"Practice ("+lesson.problems.length+") →"):null,
+        last&&li<course.lessons.length-1?e("button",{style:bg,onClick:function(){setLi(li+1);setSi(0)}},"Next Lesson"):null,
+        last&&li===course.lessons.length-1?e("button",{style:bg,onClick:function(){setView("hub")}},"Back"):null));}
+
+  // ═══ STUDY PRACTICE ═══
+  if(view==="practice"&&course&&lesson){var p=lesson.problems[pi];if(!p)return null;
+    return e("div",{style:pg},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},
+        e("div",{style:{display:"flex",gap:8,alignItems:"center"}},e("button",{style:bg,onClick:function(){setView("lesson");setSi(lesson.sections.length-1)}},"← Lesson"),e("span",{style:tag(course.color)},lesson.title)),
+        e("div",{style:{fontFamily:ff,fontSize:12,color:"#555048"}},score.c+"/"+score.t)),
+      bar(((pi+1)/lesson.problems.length)*100,course.color),
+      e("div",{style:{fontFamily:ff,fontSize:12,color:"#444",marginBottom:8}},"Q"+(pi+1)+"/"+lesson.problems.length),
+      e("div",{style:bx},p.q),
+      e("div",{style:{display:"flex",gap:8,marginBottom:10}},
+        e("input",{ref:inputRef,style:inp,onKeyDown:function(ev){if(ev.key==="Enter"&&!fb)chkStudy()},placeholder:"Your answer…",readOnly:!!fb,autoComplete:"off",autoCorrect:"off",autoCapitalize:"off",spellCheck:false}),
+        !fb?e("button",{style:bt(course.color),onClick:chkStudy},"Check"):e("button",{style:bt("#555"),onClick:nxtStudy},pi<lesson.problems.length-1?"Next →":"Done")),
+      fb?e("div",{style:fbS(fb==="y")},fb==="y"?"✓ Correct!":"✗ Answer: "+p.a):null,
+      e("div",{style:{display:"flex",gap:6}},!showH&&!showS?e("button",{style:bg,onClick:function(){setShowH(true)}},"Hint"):null,e("button",{style:bg,onClick:function(){setShowS(!showS)}},showS?"Hide":"Solution")),
+      showH&&!showS?e("div",{style:hntS},p.h):null,
+      showS?e("div",{style:solS},p.sol):null);}
+
+  // ═══ COMP PRACTICE ═══
+  if(view==="compPractice"){var p=tProbs[pi];if(!p)return null;var tm2=COMP_TOPICS[p.topic];
+    return e("div",{style:pg},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}},
+        e("div",{style:{display:"flex",gap:8,alignItems:"center"}},e("button",{style:bg,onClick:function(){setView("compTopic")}},"← Back"),e("span",{style:tag(tm2.color)},tm2.label)),
+        e("div",{style:{fontFamily:ff,fontSize:12,color:"#555048"}},score.c+"/"+score.t)),
+      bar(((pi+1)/tProbs.length)*100,tm2.color),
+      e("div",{style:{fontFamily:ff,fontSize:12,color:"#444",marginBottom:8}},"Q"+(pi+1)+"/"+tProbs.length),
+      e("div",{style:bx},p.q),
+      e("div",{style:{display:"flex",gap:8,marginBottom:10}},
+        e("input",{ref:inputRef,style:inp,onKeyDown:function(ev){if(ev.key==="Enter"&&!fb)chkComp()},placeholder:"Answer…",readOnly:!!fb,autoComplete:"off",autoCorrect:"off",autoCapitalize:"off",spellCheck:false}),
+        !fb?e("button",{style:bt(tm2.color),onClick:chkComp},"Check"):e("button",{style:bt("#555"),onClick:function(){if(pi<tProbs.length-1){setPi(pi+1);resetInput();}else setView("compTopic")}},pi<tProbs.length-1?"Next →":"Done")),
+      fb?e("div",{style:fbS(fb==="y")},fb==="y"?"✓":"✗ "+p.a):null,
+      e("div",{style:{display:"flex",gap:6}},!showH&&!showS?e("button",{style:bg,onClick:function(){setShowH(true)}},"Hint"):null,e("button",{style:bg,onClick:function(){setShowS(!showS)}},showS?"Hide":"Solution")),
+      showH&&!showS?e("div",{style:hntS},p.h):null,
+      showS?e("div",{style:solS},p.sol):null);}
+
+  // ═══ TIMED ═══
+  if(view==="timed"){
+    if(tDone){var correct=0;Object.values(tAns).forEach(function(a){if(a.correct)correct++});
+      return e("div",{style:pg},
+        e("div",{style:{textAlign:"center",marginBottom:20}},
+          e("div",{style:{fontSize:10,fontFamily:ff,letterSpacing:2,textTransform:"uppercase",color:"#555048"}},COMP_ROUNDS[roundType].name+" Complete"),
+          e("div",{style:{fontFamily:ff,fontSize:52,fontWeight:700,color:correct>=tProbs.length*.7?"#2a9d8f":"#e07a2f",margin:"8px 0"}},correct+"/"+tProbs.length)),
+        tProbs.map(function(p,i){var a=tAns[i];var tm3=COMP_TOPICS[p.topic];var open=revId===i;return e("div",{key:i,style:Object.assign({},bx,{borderLeft:"3px solid "+(a&&a.correct?"#2a9d8f":"#e04040"),padding:"12px 16px",marginBottom:6,cursor:"pointer"}),onClick:function(){setRevId(open?null:i)}},
+          e("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:3}},
+            e("span",{style:{fontSize:11,color:"#555048"}},"Q"+(i+1)+" · "+tm3.label),
+            e("span",{style:{fontFamily:ff,fontSize:11,color:a&&a.correct?"#2a9d8f":"#e04040"}},a&&a.correct?"✓":"✗ "+(a?a.given:"—"))),
+          e("div",{style:{fontSize:13}},p.q),
+          e("div",{style:{fontSize:12,color:"#2a9d8f",fontFamily:ff,marginTop:2}},"Answer: "+p.a),
+          open?e("div",{style:solS},p.sol):null,
+          e("div",{style:{fontSize:10,color:"#333",marginTop:3}},open?"▲ collapse":"▼ solution"))}),
+        e("div",{style:{display:"flex",gap:8,justifyContent:"center",marginTop:16}},
+          e("button",{style:bt(COMP_ROUNDS[roundType].color),onClick:function(){startRound(roundType)}},"Retry"),
+          e("button",{style:bg,onClick:function(){setView("compHome")}},"Back")));}
+
+    var p=tProbs[pi];if(!p)return null;var tm4=COMP_TOPICS[p.topic];var rc=COMP_ROUNDS[roundType];
+    return e("div",{style:pg},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}},
+        e("button",{style:bg,onClick:function(){setTDone(true);setTimerOn(false);clearInterval(intRef.current)}},"End"),
+        e("span",{style:tag(tm4.color)},tm4.label)),
+      e("div",{style:{fontFamily:ff,fontSize:32,fontWeight:700,color:timeLeft<30?"#e04040":"#e07a2f",textAlign:"center",margin:"0 0 14px"}},fmt(timeLeft)),
+      bar(((pi+1)/tProbs.length)*100,rc.color),
+      e("div",{style:{fontFamily:ff,fontSize:12,color:"#444",marginBottom:8}},rc.name+" · Q"+(pi+1)+"/"+tProbs.length),
+      e("div",{style:bx},p.q),
+      e("div",{style:{display:"flex",gap:8,marginBottom:10}},
+        e("input",{ref:inputRef,style:inp,onKeyDown:function(ev){if(ev.key==="Enter"&&!fb)chkComp()},placeholder:"Answer…",readOnly:!!fb,autoComplete:"off",autoCorrect:"off",autoCapitalize:"off",spellCheck:false}),
+        !fb?e("button",{style:bt(rc.color),onClick:chkComp},"Submit"):e("button",{style:bt("#555"),onClick:nxtComp},pi<tProbs.length-1?"Next →":"Finish")),
+      fb?e("div",{style:fbS(fb==="y")},fb==="y"?"✓":"✗ "+p.a):null,
+      !fb?e("button",{style:bg,onClick:skipComp},"Skip"):null);}
+
+  return null;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(e(App));
+</script></body></html>
