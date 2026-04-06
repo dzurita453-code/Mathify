@@ -798,7 +798,7 @@ function App() {
     setFb(null);
     setShowH(false);
     setShowS(false);
-    setAns("");
+    if(inputRef.current)inputRef.current.value="";
     setTimerOn(false);
     setTDone(false);
     clearInterval(intRef.current);
@@ -841,7 +841,7 @@ function App() {
     }).filter(Boolean) : PROBLEMS[t];
     setProbs(ps);
     setPi(0);
-    setAns("");
+    if(inputRef.current)inputRef.current.value="";
     setFb(null);
     setShowH(false);
     setShowS(false);
@@ -861,7 +861,7 @@ function App() {
     setTimeLeft(c.time);
     setTimerOn(true);
     setTDone(false);
-    setAns("");
+    if(inputRef.current)inputRef.current.value="";
     setFb(null);
     setShowH(false);
     setShowS(false);
@@ -894,7 +894,7 @@ function App() {
       setTimerOn(false);
       clearInterval(intRef.current);
     } else setPi(0);
-    setAns("");
+    if(inputRef.current)inputRef.current.value="";
     setFb(null);
     setShowH(false);
     setShowS(false);
@@ -1436,15 +1436,11 @@ function App() {
     }, /*#__PURE__*/React.createElement("input", {
       ref: inputRef,
       style: S.input,
-      value: ans,
-      onChange: function onChange(e) {
-        return setAns(e.target.value);
-      },
-      onKeyDown: function onKeyDown(e) {
+            onKeyDown: function onKeyDown(e) {
         return e.key === "Enter" && !fb && check();
       },
       placeholder: "Your answer\u2026",
-      disabled: !!fb
+      readOnly: !!fb
     }), !fb ? /*#__PURE__*/React.createElement("button", {
       style: S.btn(m.color),
       onClick: check
@@ -1636,15 +1632,11 @@ function App() {
     }, /*#__PURE__*/React.createElement("input", {
       ref: inputRef,
       style: S.input,
-      value: ans,
-      onChange: function onChange(e) {
-        return setAns(e.target.value);
-      },
-      onKeyDown: function onKeyDown(e) {
+            onKeyDown: function onKeyDown(e) {
         return e.key === "Enter" && !fb && check();
       },
       placeholder: "Answer\u2026",
-      disabled: !!fb
+      readOnly: !!fb
     }), !fb ? /*#__PURE__*/React.createElement("button", {
       style: S.btn(cfg.color),
       onClick: check
